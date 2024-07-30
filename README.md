@@ -69,9 +69,46 @@ To get started with the workshop materials, follow these steps:
    ```
 
 2. **Arduino/ESP8266 Setup:**
-   - Install the Arduino IDE from [Arduino](https://www.arduino.cc/en/software).
-   - Add the ESP8266 board manager URL in the Arduino IDE preferences.
-   - Install the necessary libraries as specified in the code comments.
+   
+   ### Prerequisites: Arduino IDE Installed
+   
+   Before starting this installation procedure, make sure you have the latest version of the Arduino IDE installed on your computer. If you don’t, uninstall it and install it again. Otherwise, it may not work.
+
+   Having the latest Arduino IDE software installed from [arduino.cc](https://www.arduino.cc/en/Main/Software), continue with this tutorial.
+
+   Do you need an ESP8266 board? You can buy it [here](https://www.example.com).
+
+   ### Install ESP8266 Add-on in Arduino IDE
+   
+   To install the ESP8266 board in your Arduino IDE, follow these next instructions:
+
+   1. **Open Preferences:**
+      In your Arduino IDE, go to `File > Preferences`.
+
+   2. **Enter Board Manager URL:**
+      Enter `http://arduino.esp8266.com/stable/package_esp8266com_index.json` into the “Additional Boards Manager URLs” field as shown in the figure below. Then, click the “OK” button:
+
+      ![Install ESP8266 Board add-on in Arduino IDE enter URL](link-to-image)
+
+      *Note: if you already have the ESP32 boards URL, you can separate the URLs with a comma as follows:*
+      ```
+      https://dl.espressif.com/dl/package_esp32_index.json, http://arduino.esp8266.com/stable/package_esp8266com_index.json
+      ```
+
+   3. **Open Boards Manager:**
+      Go to `Tools > Board > Boards Manager…`
+
+      ![Install ESP8266 Board add-on in Arduino IDE Open boards manager](link-to-image)
+
+   4. **Install ESP8266 Board:**
+      Search for `ESP8266` and press the install button for the “ESP8266 by ESP8266 Community”:
+
+      ![Install ESP8266 Board add-on in Arduino IDE search ESP8266](link-to-image)
+
+      That’s it. It should be installed after a few seconds.
+
+      ![ESP8266 Board add-on in Arduino IDE installed](link-to-image)
+
 
 3. **Tinkercad Projects:**
    - Access the Tinkercad projects using the links provided in the `Tinkercad_Projects` directory.
