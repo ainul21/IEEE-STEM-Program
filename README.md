@@ -98,16 +98,16 @@ To get started with the workshop materials, follow these steps:
    3. **Open Boards Manager:**
       Go to `Tools > Board > Boards Manager…`
 
-      ![Install ESP8266 Board add-on in Arduino IDE Open boards manager](link-to-image)
+      ![Install ESP8266 Board add-on in Arduino IDE Open boards manager](Documentation/media/boards_manager.png)
 
    4. **Install ESP8266 Board:**
       Search for `ESP8266` and press the install button for the “ESP8266 by ESP8266 Community”:
 
-      ![Install ESP8266 Board add-on in Arduino IDE search ESP8266](link-to-image)
+      ![Install ESP8266 Board add-on in Arduino IDE search ESP8266](Documentation/media/install_board.png)
 
       That’s it. It should be installed after a few seconds.
 
-      ![ESP8266 Board add-on in Arduino IDE installed](link-to-image)
+      ![ESP8266 Board add-on in Arduino IDE installed](Documentation/media/installed.png)
 
 
 3. **Tinkercad Projects:**
