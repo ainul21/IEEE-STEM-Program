@@ -1,0 +1,153 @@
+[
+    {
+        "id": "c7926f87.d333a",
+        "type": "tab",
+        "label": "Track ISS",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "fdac59dc.7e7108",
+        "type": "debug",
+        "z": "c7926f87.d333a",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "e315c195.9065a",
+        "type": "inject",
+        "z": "c7926f87.d333a",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 60,
+        "wires": [
+            [
+                "b295d758.a5eb08"
+            ]
+        ]
+    },
+    {
+        "id": "b295d758.a5eb08",
+        "type": "http request",
+        "z": "c7926f87.d333a",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "url": "http://api.open-notify.org/iss-now.json",
+        "tls": "",
+        "x": 310,
+        "y": 60,
+        "wires": [
+            [
+                "e6d4f16e.c2c9a"
+            ]
+        ]
+    },
+    {
+        "id": "e6d4f16e.c2c9a",
+        "type": "json",
+        "z": "c7926f87.d333a",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 490,
+        "y": 60,
+        "wires": [
+            [
+                "303c96c9.caf92a"
+            ]
+        ]
+    },
+    {
+        "id": "303c96c9.caf92a",
+        "type": "function",
+        "z": "c7926f87.d333a",
+        "name": "",
+        "func": "var issLocation = msg.payload.iss_position;\nmsg.payload = {\n    name : \"ISS\",\n    lat : parseFloat(issLocation.latitude),\n    lon : parseFloat(issLocation.longitude)\n};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 60,
+        "wires": [
+            [
+                "fdac59dc.7e7108",
+                "aab3f26264cb5f3e"
+            ]
+        ]
+    },
+    {
+        "id": "aab3f26264cb5f3e",
+        "type": "ui_worldmap",
+        "z": "c7926f87.d333a",
+        "group": "95be93c681cb6464",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "lat": "",
+        "lon": "",
+        "zoom": "0",
+        "layer": "OSMG",
+        "cluster": "",
+        "maxage": "",
+        "usermenu": "hide",
+        "layers": "hide",
+        "panit": "false",
+        "panlock": "false",
+        "zoomlock": "false",
+        "hiderightclick": "true",
+        "coords": "none",
+        "showgrid": "false",
+        "showruler": "false",
+        "allowFileDrop": "false",
+        "path": "/worldmap",
+        "overlist": "DR,CO,RA,DN,HM",
+        "maplist": "OSMG,OSMC,EsriC,EsriS,EsriT,EsriDG,UKOS",
+        "mapname": "",
+        "mapurl": "",
+        "mapopt": "",
+        "mapwms": false,
+        "x": 820,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "95be93c681cb6464",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "b0fe3fe93796667d",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "b0fe3fe93796667d",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
