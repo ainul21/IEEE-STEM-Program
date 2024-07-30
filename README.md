@@ -88,7 +88,7 @@ To get started with the workshop materials, follow these steps:
    2. **Enter Board Manager URL:**
       Enter `http://arduino.esp8266.com/stable/package_esp8266com_index.json` into the “Additional Boards Manager URLs” field as shown in the figure below. Then, click the “OK” button:
 
-      ![Install ESP8266 Board add-on in Arduino IDE enter URL](Documentation\media\preferences_arduino.png)
+      ![Install ESP8266 Board add-on in Arduino IDE enter URL](Documentation/media/preferences_arduino.png)
 
       *Note: if you already have the ESP32 boards URL, you can separate the URLs with a comma as follows:*
       ```
