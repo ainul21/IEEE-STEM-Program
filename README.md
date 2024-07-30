@@ -76,7 +76,7 @@ To get started with the workshop materials, follow these steps:
 
    Having the latest Arduino IDE software installed from [arduino.cc](https://www.arduino.cc/en/Main/Software), continue with this tutorial.
 
-   Do you need an ESP8266 board? You can buy it [here](https://www.example.com).
+   Do you need an ESP8266 board? You can buy it [here](https://www.vectoraintech.com).
 
    ### Install ESP8266 Add-on in Arduino IDE
    
@@ -88,7 +88,7 @@ To get started with the workshop materials, follow these steps:
    2. **Enter Board Manager URL:**
       Enter `http://arduino.esp8266.com/stable/package_esp8266com_index.json` into the “Additional Boards Manager URLs” field as shown in the figure below. Then, click the “OK” button:
 
-      ![Install ESP8266 Board add-on in Arduino IDE enter URL](link-to-image)
+      ![Install ESP8266 Board add-on in Arduino IDE enter URL](Documentation\media\preferences_arduino.png)
 
       *Note: if you already have the ESP32 boards URL, you can separate the URLs with a comma as follows:*
       ```
