@@ -64,8 +64,8 @@ To get started with the workshop materials, follow these steps:
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/yourusername/IoT-5G-Workshop.git
-   cd IoT-5G-Workshop
+   git clone https://github.com/ainul21/IEEE-STEM-Program.git
+   cd IEEE-STEM-Program
    ```
 
 2. **Arduino/ESP8266 Setup:**
