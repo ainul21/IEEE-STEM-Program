@@ -21,12 +21,15 @@ This repository is designed to support participants of the IoT and 5G Workshop. 
 
 - **Organizer:** Universiti Sains Islam Malaysia (USIM)
 - **Sponsor:** IEEE
+- **Participants:** Students from Sekolah Menengah Agama Persekutuan (SMAP) Labu
+- **Time:** 9:30 a.m. - 12:30 p.m.
 - **Topics Covered:** 
   - Internet of Things (IoT)
   - 5G Technology
+  - Tinkercad Simulations
   - Arduino/ESP8266 Programming
   - Node-RED Flows
-  - Tinkercad Simulations
+ 
 
 ## Repository Structure
 
