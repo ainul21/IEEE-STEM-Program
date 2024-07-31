@@ -9,11 +9,7 @@ const int mqtt_port = 1883;
 const char* mqtt_user = ""; // Add user if authentication is required
 const char* mqtt_password = ""; // Add password if authentication is required
 
-// MQTT Topics 
-// Change topic according to your group number. Example: Group 5 should use 'distance5' and 'led5' as below:
-// const char* distance_topic = "sensor/distance5";)
-// const char* led_control_topic = "switch/led5";
-
+// MQTT Topics
 const char* distance_topic = "sensor/distance";
 const char* led_control_topic = "switch/led";
 
@@ -26,11 +22,9 @@ float preDistance = 0;
 const int redLed = D4;
 const int greenLed = D2;
 
-// Built-in LED
-const int builtInLed = LED_BUILTIN;
-
 WiFiClient espClient;
 PubSubClient client(espClient);
+bool ledControl = false;
 
 void setupWifi() {
   delay(10);
@@ -57,13 +51,18 @@ void callback(char* topic, byte* payload, unsigned int length) {
   }
   Serial.println();
 
-  // Control built-in LED based on the message
+  // Control LEDs based on the message
   if (String(topic) == led_control_topic) {
     if ((char)payload[0] == 't') { // 'true' starts with 't'
-      digitalWrite(builtInLed, HIGH);
-      delay(3000);
-    } else {
-      digitalWrite(builtInLed, LOW);
+      digitalWrite(redLed, HIGH);
+      digitalWrite(greenLed, HIGH);
+      ledControl = true;
+    } 
+    if ((char)payload[0] == 'f') { // 'false' starts with 'f'
+      digitalWrite(redLed, LOW);
+      digitalWrite(greenLed, LOW);
+      delay(1000); // delay 1 second
+      ledControl = false;
     }
   }
 }
@@ -105,51 +104,51 @@ void setup() {
   pinMode(echoPin, INPUT);
   pinMode(redLed, OUTPUT);
   pinMode(greenLed, OUTPUT);
-  pinMode(builtInLed, OUTPUT);
 
   digitalWrite(redLed, LOW);
   digitalWrite(greenLed, LOW);
-  digitalWrite(builtInLed, LOW);
 }
 
 void loop() {
   ensureConnections();
   client.loop();
 
-  // Read distance from ultrasonic sensor
-  digitalWrite(trigPin, LOW);
-  delayMicroseconds(2);
-  digitalWrite(trigPin, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(trigPin, LOW);
+  if (!ledControl) {
+    // Read distance from ultrasonic sensor
+    digitalWrite(trigPin, LOW);
+    delayMicroseconds(2);
+    digitalWrite(trigPin, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(trigPin, LOW);
 
-  unsigned long duration = pulseIn(echoPin, HIGH);
-  float distance = duration * 0.034 / 2;
+    unsigned long duration = pulseIn(echoPin, HIGH);
+    float distance = duration * 0.034 / 2;
 
-  if (distance < 10) {
-    digitalWrite(redLed, HIGH);
-    digitalWrite(greenLed, LOW);
-    Serial.print(distance);
-    Serial.println(": Red LED ON, Green LED OFF");
-    preDistance = distance;
-  } else {
-    digitalWrite(redLed, LOW);
-    digitalWrite(greenLed, HIGH);
-    Serial.print(distance);
-    Serial.println(": Red LED OFF, Green LED ON");
-    preDistance = distance;
+    if (distance < 10) {
+      digitalWrite(redLed, HIGH);
+      digitalWrite(greenLed, LOW);
+      Serial.print(distance);
+      Serial.println(": Red LED ON, Green LED OFF");
+      preDistance = distance;
+    } else {
+      digitalWrite(redLed, LOW);
+      digitalWrite(greenLed, HIGH);
+      Serial.print(distance);
+      Serial.println(": Red LED OFF, Green LED ON");
+      preDistance = distance;
+    }
+
+    delay(400);
+
+    // Check if any reads failed and exit early (to try again).
+    if (isnan(distance)) {
+      Serial.println("Failed to read from sensors!");
+      return;
+    }
+
+    // Publish Sensor Data
+    client.publish(distance_topic, String(distance).c_str(), true);
+
+    delay(100); // Delay between measurements
   }
-
-  delay(400);
-
-  // Check if any reads failed and exit early (to try again).
-  if (isnan(distance)) {
-    Serial.println("Failed to read from sensors!");
-    return;
-  }
-
-  // Publish Sensor Data
-  client.publish(distance_topic, String(distance).c_str(), true);
-
-  delay(100); // Delay between measurements
 }
