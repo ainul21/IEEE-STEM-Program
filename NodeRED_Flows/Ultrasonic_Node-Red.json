@@ -1,6 +1,6 @@
 [
     {
-        "id": "8a94a55ba83c1781",
+        "id": "14ed7a95c0b3df4a",
         "type": "tab",
         "label": "IEEE - ESP8266 US",
         "disabled": false,
@@ -8,14 +8,14 @@
         "env": []
     },
     {
-        "id": "38407a132a207205",
+        "id": "40c84a4d04b3ba54",
         "type": "mqtt in",
-        "z": "8a94a55ba83c1781",
+        "z": "14ed7a95c0b3df4a",
         "name": "Distance MQTT",
         "topic": "sensor/distance",
         "qos": "0",
         "datatype": "auto-detect",
-        "broker": "4d6606e5d2c874c8",
+        "broker": "f0b40f051f30e23d",
         "nl": false,
         "rap": true,
         "rh": 0,
@@ -24,17 +24,17 @@
         "y": 160,
         "wires": [
             [
-                "1046ca4932623544",
-                "14bb4d92d1980795",
-                "617a91b786b71cb9",
-                "4c0469d71b95d296"
+                "7146c6708430f715",
+                "10e0d04b7332f8bd",
+                "463b3c22373b0b9e",
+                "f428b382904f559e"
             ]
         ]
     },
     {
-        "id": "1046ca4932623544",
+        "id": "7146c6708430f715",
         "type": "debug",
-        "z": "8a94a55ba83c1781",
+        "z": "14ed7a95c0b3df4a",
         "name": "debug 23",
         "active": true,
         "tosidebar": true,
@@ -49,11 +49,11 @@
         "wires": []
     },
     {
-        "id": "14bb4d92d1980795",
+        "id": "10e0d04b7332f8bd",
         "type": "ui_gauge",
-        "z": "8a94a55ba83c1781",
+        "z": "14ed7a95c0b3df4a",
         "name": "",
-        "group": "95be93c681cb6464",
+        "group": "607f84b3295ba66d",
         "order": 1,
         "width": 0,
         "height": 0,
@@ -70,15 +70,16 @@
         ],
         "seg1": "20",
         "seg2": "40",
+        "diff": false,
         "className": "",
         "x": 520,
         "y": 180,
         "wires": []
     },
     {
-        "id": "617a91b786b71cb9",
+        "id": "463b3c22373b0b9e",
         "type": "function",
-        "z": "8a94a55ba83c1781",
+        "z": "14ed7a95c0b3df4a",
         "name": "Date/Time",
         "func": "var readCurrent = new Date().getTime();\nmsg.payload = readCurrent;\nreturn msg;",
         "outputs": 1,
@@ -90,14 +91,14 @@
         "y": 280,
         "wires": [
             [
-                "13dcb13408612b37"
+                "0fc8dc6ecbd815d1"
             ]
         ]
     },
     {
-        "id": "13dcb13408612b37",
+        "id": "0fc8dc6ecbd815d1",
         "type": "moment",
-        "z": "8a94a55ba83c1781",
+        "z": "14ed7a95c0b3df4a",
         "name": "distance data",
         "topic": "",
         "input": "",
@@ -115,15 +116,15 @@
         "y": 280,
         "wires": [
             [
-                "0743b951f243182d"
+                "12eeac0207a4cd1a"
             ]
         ]
     },
     {
-        "id": "0743b951f243182d",
+        "id": "12eeac0207a4cd1a",
         "type": "ui_text",
-        "z": "8a94a55ba83c1781",
-        "group": "95be93c681cb6464",
+        "z": "14ed7a95c0b3df4a",
+        "group": "607f84b3295ba66d",
         "order": 3,
         "width": 0,
         "height": 0,
@@ -132,16 +133,20 @@
         "format": "{{msg.payload}}",
         "layout": "row-center",
         "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
         "x": 740,
         "y": 280,
         "wires": []
     },
     {
-        "id": "4c0469d71b95d296",
+        "id": "f428b382904f559e",
         "type": "ui_chart",
-        "z": "8a94a55ba83c1781",
+        "z": "14ed7a95c0b3df4a",
         "name": "",
-        "group": "95be93c681cb6464",
+        "group": "607f84b3295ba66d",
         "order": 2,
         "width": 0,
         "height": 0,
@@ -153,7 +158,7 @@
         "nodata": "",
         "dot": false,
         "ymin": "0",
-        "ymax": "2000",
+        "ymax": "60",
         "removeOlder": "3",
         "removeOlderPoints": "",
         "removeOlderUnit": "60",
@@ -181,7 +186,55 @@
         ]
     },
     {
-        "id": "4d6606e5d2c874c8",
+        "id": "ee28fd47a03eba9c",
+        "type": "inject",
+        "z": "14ed7a95c0b3df4a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "v": "true",
+                "vt": "bool"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 170,
+        "y": 420,
+        "wires": [
+            [
+                "079d1e1c728f228f"
+            ]
+        ]
+    },
+    {
+        "id": "079d1e1c728f228f",
+        "type": "mqtt out",
+        "z": "14ed7a95c0b3df4a",
+        "name": "",
+        "topic": "switch/led",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "58d76be84b60ccd3",
+        "x": 420,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "f0b40f051f30e23d",
         "type": "mqtt-broker",
         "name": "",
         "broker": "174.138.28.115",
@@ -208,22 +261,49 @@
         "sessionExpiry": ""
     },
     {
-        "id": "95be93c681cb6464",
+        "id": "607f84b3295ba66d",
         "type": "ui_group",
-        "name": "HC",
-        "tab": "be1d3bcff6f28c44",
-        "order": 1,
+        "name": "Default",
+        "tab": "b0fe3fe93796667d",
+        "order": 6,
         "disp": true,
         "width": "6",
         "collapse": false,
         "className": ""
     },
     {
-        "id": "be1d3bcff6f28c44",
+        "id": "58d76be84b60ccd3",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "174.138.28.115",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "b0fe3fe93796667d",
         "type": "ui_tab",
-        "name": "IEEE",
+        "name": "ESP8266 US",
         "icon": "dashboard",
-        "order": 2,
+        "order": 3,
         "disabled": false,
         "hidden": false
     }

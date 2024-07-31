@@ -1,10 +1,8 @@
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
 
-// const char* ssid = "Ainul";
-// const char* password = "asdf1234";
-const char* ssid = "dlinkap1360";
-const char* password = "abcd1234";
+const char* ssid = "Ainul";
+const char* password = "asdf1234";
 
 const char* mqtt_server = "174.138.28.115";
 const int mqtt_port = 1883;
@@ -12,14 +10,21 @@ const char* mqtt_user = ""; // Add user if authentication is required
 const char* mqtt_password = ""; // Add password if authentication is required
 
 // MQTT Topics 
-// Change topic according to your group number. Example: Group 5 should use 'distance5' as below:
+// Change topic according to your group number. Example: Group 5 should use 'distance5' and 'led5' as below:
 // const char* distance_topic = "sensor/distance5";)
+// const char* led_control_topic = "switch/led5";
+
 const char* distance_topic = "sensor/distance";
+const char* led_control_topic = "switch/led";
 
 // Ultrasonic Sensor Pins
 const int trigPin = D7;
 const int echoPin = D8;
 float preDistance = 0;
+
+// External LEDs
+const int redLed = D4;
+const int greenLed = D2;
 
 // Built-in LED
 const int builtInLed = LED_BUILTIN;
@@ -43,6 +48,26 @@ void setupWifi() {
   Serial.println(WiFi.localIP());
 }
 
+void callback(char* topic, byte* payload, unsigned int length) {
+  Serial.print("Message arrived [");
+  Serial.print(topic);
+  Serial.print("] ");
+  for (unsigned int i = 0; i < length; i++) {
+    Serial.print((char)payload[i]);
+  }
+  Serial.println();
+
+  // Control built-in LED based on the message
+  if (String(topic) == led_control_topic) {
+    if ((char)payload[0] == 't') { // 'true' starts with 't'
+      digitalWrite(builtInLed, HIGH);
+      delay(3000);
+    } else {
+      digitalWrite(builtInLed, LOW);
+    }
+  }
+}
+
 void reconnect() {
   // Loop until we're reconnected
   while (!client.connected()) {
@@ -50,6 +75,7 @@ void reconnect() {
     // Attempt to connect
     if (client.connect("ESP8266Client", mqtt_user, mqtt_password)) {
       Serial.println("connected");
+      client.subscribe(led_control_topic);
     } else {
       Serial.print("failed, rc=");
       Serial.print(client.state());
@@ -73,11 +99,16 @@ void setup() {
   Serial.begin(9600);
   setupWifi();
   client.setServer(mqtt_server, mqtt_port);
+  client.setCallback(callback);
   
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
+  pinMode(redLed, OUTPUT);
+  pinMode(greenLed, OUTPUT);
   pinMode(builtInLed, OUTPUT);
 
+  digitalWrite(redLed, LOW);
+  digitalWrite(greenLed, LOW);
   digitalWrite(builtInLed, LOW);
 }
 
@@ -96,18 +127,20 @@ void loop() {
   float distance = duration * 0.034 / 2;
 
   if (distance < 10) {
-    digitalWrite(builtInLed, HIGH);
+    digitalWrite(redLed, HIGH);
+    digitalWrite(greenLed, LOW);
     Serial.print(distance);
-    Serial.println(": LED ON");
+    Serial.println(": Red LED ON, Green LED OFF");
     preDistance = distance;
   } else {
-    digitalWrite(builtInLed, LOW);
+    digitalWrite(redLed, LOW);
+    digitalWrite(greenLed, HIGH);
     Serial.print(distance);
-    Serial.println(": LED OFF");
+    Serial.println(": Red LED OFF, Green LED ON");
     preDistance = distance;
   }
 
-  delay(10);
+  delay(400);
 
   // Check if any reads failed and exit early (to try again).
   if (isnan(distance)) {
