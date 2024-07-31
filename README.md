@@ -40,24 +40,6 @@ The repository is organized into the following directories:
 - **NodeRED_Flows:** JSON files for Node-RED flows.
 - **Documentation:** Any additional documentation or notes for the workshop.
 
-```
-├── Arduino_ESP8266_Code
-│   ├── project1
-│   ├── project2
-│   └── ...
-├── Tinkercad_Projects
-│   ├── project1_link.txt
-│   ├── project2_link.txt
-│   └── ...
-├── NodeRED_Flows
-│   ├── flow1.json
-│   ├── flow2.json
-│   └── ...
-└── Documentation
-    ├── notes.md
-    └── ...
-```
-
 ## Getting Started
 
 To get started with the workshop materials, follow these steps:
