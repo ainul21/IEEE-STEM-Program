@@ -1,17 +1,19 @@
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
 
-const char* ssid = "Ainul";
-const char* password = "asdf1234";
-// const char* ssid = "dlinkap1360";
-// const char* password = "abcd1234";
+// const char* ssid = "Ainul";
+// const char* password = "asdf1234";
+const char* ssid = "dlinkap1360";
+const char* password = "abcd1234";
 
 const char* mqtt_server = "174.138.28.115";
 const int mqtt_port = 1883;
 const char* mqtt_user = ""; // Add user if authentication is required
 const char* mqtt_password = ""; // Add password if authentication is required
 
-// MQTT Topics
+// MQTT Topics 
+// Change topic according to your group number. Example: Group 5 should use 'distance5' as below:
+// const char* distance_topic = "sensor/distance5";)
 const char* distance_topic = "sensor/distance";
 
 // Ultrasonic Sensor Pins
