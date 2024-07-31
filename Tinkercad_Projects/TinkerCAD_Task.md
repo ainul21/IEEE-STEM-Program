@@ -24,8 +24,8 @@ This task simulates the Knight Rider light effect using multiple LEDs. The LEDs 
 
 ### Components Used
 - Arduino Uno
-- 8 LEDs
-- 8 Resistors
+- 4 LEDs
+- 4 Resistors
 - Breadboard
 - Connecting wires
 
@@ -39,6 +39,8 @@ This task uses an ultrasonic sensor to measure the distance to an object and dis
 
 ### Components Used
 - Arduino Uno
+- 2 LEDs
+- 2 Resistors
 - Ultrasonic Sensor (HC-SR04)
 - Breadboard
 - Connecting wires
