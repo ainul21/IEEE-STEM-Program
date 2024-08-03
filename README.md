@@ -96,6 +96,10 @@ To get started with the workshop materials, follow these steps:
    - Access the Tinkercad projects using the links provided in the `Tinkercad_Projects` directory.
 
 4. **Node-RED Flows:**
+   - Installing Node-RED as a global module adds the command node-red to your system path. Execute the following at the command prompt:
+     ```
+      npm install -g --unsafe-perm node-red
+      ```
    - Import the JSON files in the `NodeRED_Flows` directory into your Node-RED instance.
 
 ## Resources
