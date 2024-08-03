@@ -1,8 +1,8 @@
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
 
-const char* ssid = "Ainul";
-const char* password = "asdf1234";
+const char* ssid = "dlinkap1360";
+const char* password = "abcd1234";
 
 const char* mqtt_server = "174.138.28.115";
 const int mqtt_port = 1883;
@@ -10,6 +10,9 @@ const char* mqtt_user = ""; // Add user if authentication is required
 const char* mqtt_password = ""; // Add password if authentication is required
 
 // MQTT Topics
+// If you are on group 5, please add '/G5' at the end of the topic as bellow
+//const char* distance_topic = "sensor/distance/G5";
+// const char* led_control_topic = "switch/ledG5";
 const char* distance_topic = "sensor/distance";
 const char* led_control_topic = "switch/led";
 
@@ -149,6 +152,6 @@ void loop() {
     // Publish Sensor Data
     client.publish(distance_topic, String(distance).c_str(), true);
 
-    delay(100); // Delay between measurements
+    delay(5000); // Delay between measurements
   }
 }
